@@ -1,0 +1,45 @@
+#!/usr/bin/env php
+<?php
+//commands that can be run - (think clone, pull, checkout, etc. for git)
+start();
+$m = new message;
+
+//load commands
+$commands_dir = scandir(__DIR__.'/commands');
+foreach($commands_dir as $key => $command){
+	if(preg_match('/^[a-z]+\.php$/i', $command)){ // only lower case letters and a - followed by .php are valid command names (like drush)
+		require_once(__DIR__.'/commands/'.$command); //should we require everything even if we don't need it? - ATM yes
+		$command = substr($command, 0, -4);
+		$commands[$command] = str_replace('-','_', $command);
+	}else{
+		unset($commands[$key]);
+	}
+}
+
+if($argc==1){
+	stop("Type 'scout help' for usage.");
+}
+
+$command=$argv[1];
+
+if(array_key_exists($command, $commands)){
+	$go = new $commands[$command];
+	$go->init();
+	$go->run();
+	stop();	
+}else{
+	$m->error("Unrecognised command: '$command'. Type 'scout help' for usage." );	
+	exit;	
+}
+
+
+
+function start(){
+	require_once 'config.inc.php';
+	require_once 'aws.php';
+	require_once 'command.php';
+	require_once 'message.php';
+	require_once 'template.php';
+}
+
+

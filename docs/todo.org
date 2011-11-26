@@ -1,0 +1,62 @@
+* commit to git
+* understand puppet certificates
+when do they get created?
+* backup
+open account on rackspace to do backups
+* create distributed file system
+AWS doesn't have a distributed file system so we need to solve the
+problem of how we make DRUPAL/sites/default/files available to more
+than one app server ourselves.
+The probelm is that for each client we have a directory which is
+available at DRUPAL/sites/default/files.  In our current set up, this
+in on the application server.  If we are using load balancers and
+seperate app servers, what will happen when someone uploads a file to
+drupal, or clears the CiviCRM cache, etc.  We need a way of syncing
+all this data.
+Possible solutions below.  I think we'll use Gluster.
+** use NFS
+We'd set each PROJECT/sites/default/files as a symlink to
+files/PROJECT which is on an NFS (this would need to be done as part
+of the Drupal make).
+The problem here is that we still might have a single POF.  I'm wondering
+if that means that we
+distributed file system? Doesn't AWS provide that?
+** use gluster
+Acquia does:
+http://www.cloudave.com/21/acquia-uses-gluster-storage-for-drupal-gardens-saas-offering/
+* how can we provide SSL in a secure / redundant way for each client that requires it?
+AWS can attach SSL to a load balancer.  We can then have one SSL
+connection for each load balancer (which are AWS redundant).  Using
+the API, we can attach all load balancers to multiple app servers.
+If we want to use load balancers for a route domain, we'll need to use
+route 53 to get the route domain attached to a CNAME (since this isn't
+possible withing BIND).  This means that anyone that wants to to this
+will have to have their DNS hosted with us
+* create application server
+part of this is mounting the file system.  We need to work out what
+parts of the server should be kept on the distributed file system.
+Maybe the entire collection of sites.
+Do we have a seperate user for each project? Do we use /home/PROJECT?
+Maybe not necessary if we aren't ever sudo ing on to production.
+Maybe useful for the times that we need to.
+* create DB server
+configure an AWS db server.  How can we ensure that this is spread
+amongst availablity zones and regions
+* Configure monitoring
+How do we do monitoring of the DB server? Not a problem if we can't tho would be nice to see them all in one place
+* automate connection of nodes
+* create project scripts
+scout project create PROJECT 
+scout project deploy PROJECT
+scout sync PROJECT SITE (SITE = TEST, DEV, LOCAL, BRAZIL)
+I imagine we'll harness the power of drush for deployment.
+* performance and optimisation
+http://2bits.com/articles/drupal-performance-tuning-and-optimization-for-large-web-sites.html
+need to optimise the following
+** php
+** apc
+** apache
+** mysql
+(probably taken care of via aws)
+** apc
+

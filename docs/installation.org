@@ -1,0 +1,2 @@
+echo michael.thirdsectordesign.org > /etc/hostname
+/etc/init.d/hostname restart

@@ -1,0 +1,36 @@
+* each client runs under own user
+* each client has permissions set by an adapted version of the drupal fix permissions script
+* we have a drush make script for each project
+* all client passwords are stored somewhere secure
+* clients have the following different passwords
+** mysql user
+** cron user? (seperate from admin user)
+* do we set an admin user for Drupal?
+* list of configuration files
+|----------------------+---------------------------------------------------------|
+| File/usage           | Path                                                    |
+|----------------------+---------------------------------------------------------|
+| virtual host         | /etc/apache/sites-available/CLIENT_NAME                 |
+| settings.php         | /var/www/CLIENT_NAME/sites/default/settings.php         |
+| civicrm.settings.php | /var/www/CLIENT_NAME/sites/default/civicrm.settings.php |
+|----------------------+---------------------------------------------------------|
+* list of variables to be set in these configuration files
+|---------------------+--------------------------------------------|
+| Variable name       | Notes                                      |
+|---------------------+--------------------------------------------|
+| client name         | alphanumeric                               |
+| ServerName          |                                            |
+| ServerAliases       | Can be more than one                       |
+| Server root         |                                            |
+| CiviCRM database    |                                            |
+| Drupal database     |                                            |
+| Database host       | Should this be the same for both datbases? |
+| templates directory |                                            |
+| Site key            |                                            |
+| cron user name?     |                                            |
+| cron user password? |                                            |
+|---------------------+--------------------------------------------|
+
+
+
+
