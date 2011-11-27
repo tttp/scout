@@ -22,7 +22,7 @@ class command {
 				
 				//check that this is a valid command
 				if(!preg_match('/^[a-z]+$/', $a)){
-					stop("Invalid argument: $a (arguments should be lower case alphanumeric).");
+					$this->m->fatal("Invalid argument: $a (arguments should be lower case alphanumeric).");
 				}
 				$this->args[] = $a;
 				array_shift($this->command);

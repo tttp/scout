@@ -1,6 +1,3 @@
-* commit to git
-* understand puppet certificates
-when do they get created?
 * backup
 open account on rackspace to do backups
 * create distributed file system

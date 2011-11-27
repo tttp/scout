@@ -17,7 +17,7 @@ foreach($commands_dir as $key => $command){
 }
 
 if($argc==1){
-	stop("Type 'scout help' for usage.");
+	$m->fatal("Type 'scout help' for usage.");
 }
 
 $command=$argv[1];
