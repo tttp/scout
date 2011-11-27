@@ -1,6 +1,10 @@
 node 'argentina.thirdsectordesign.org' inherits webserver { # a production server with MySQL
 }
 
+node '*.webserver.thirdsectordesign.org' inherits webserver { # a production server with MySQL
+}
+
+
 node webserver {
   include common, apache, php, mysql, munin, scout  
 }
