@@ -1,8 +1,0 @@
-#cloud-config
-# see https://help.ubuntu.com/community/CloudInit for reference
-# try this one http://backdrift.org/ubuntu-uecec2-puppet-client-howto
-runcmd:
-- echo {{{hostname}}}.thirdsectordesign.org > /etc/hostname
-- /etc/init.d/hostname restart
-byobu_by_default: disable-system
-
