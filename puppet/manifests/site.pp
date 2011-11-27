@@ -36,14 +36,7 @@ class php{
       owner => root,
       group => root,
       source => "puppet:///modules/php/phpinfo.php"
-  }
-  file { "/var/www/apc.php":
-      mode => 644,
-      owner => root,
-      group => root,
-      source => "puppet:///modules/php/phpinfo.php"
-  }
-  
+  }  
 }
 
 class mysql{
