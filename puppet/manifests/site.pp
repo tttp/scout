@@ -15,7 +15,7 @@ class apache{
   package { ['apache2-mpm-worker', 'libapache2-mod-fcgid'] :
     ensure => present
   }
-  file { "/etc/apache/httpd.conf":
+  file { "/etc/apache2/httpd.conf":
       mode => 644,
       owner => root,
       group => root,
