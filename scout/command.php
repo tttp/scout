@@ -6,15 +6,11 @@ class command {
 
 	var $options=array();
 			
-	function init_drush(){
-		
-	}
-
 	function init(){
 		$this->m = new message;
 		$this->parse_command();
 	}
-		
+	
 	function parse_command(){
 		global $argv;
 		$this->command=$argv;
@@ -42,7 +38,7 @@ class command {
 		foreach($this->available_options as $k => $available_option){
 			$this->option_names[$available_option['name']]=$k;
 			if($available_option['set_if_empty']==true){
-				$this->opts[$k]['value']=$available_option['default'];
+				$this->opts[$k]=$available_option['default'];
 			}
 		}
 		
@@ -85,7 +81,6 @@ class command {
 		
 		//validate options
 		foreach($this->opts as $k => $v){
-
 			//ensure value is a valid option (when valid options are specified in $available_options
 			if(is_array($this->available_options[$k]['options']) && !in_array($v, $this->available_options[$k]['options'])){
 				$this->m->fatal("$v is not a valid option for -$k / --{$this->available_options[$k]['name']}.");
@@ -100,7 +95,7 @@ class command {
 	}
 	
 	function invalid_option($o){
-		fatal("Parse error: option $o does not exist for the command {$this->args[0]}");
+		$this->m->fatal("Parse error: option $o does not exist for the command {$this->args[0]}");
 	}
 		
 	

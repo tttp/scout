@@ -1,7 +1,7 @@
 <?php
 class aws {
 	
-	var $defaults=array(
+	var $settings=array(
 		'eu-west-1'=>array(
 			'az'=>'eu-west-1a',
 			'image'=>'ami-65b28011', //ubuntu 11.10, see http://alestic.com/
@@ -13,8 +13,15 @@ class aws {
 			),
 		);
 	
-	var $region = 'us-east-1';
+	var $region = NULL;
 
+	function __construct(){
+		$this->region = SCOUT_AWS_REGION;
+		if(!array_key_exists($this->region, $this->settings)){
+			message::fatal("No AWS settings found for region: {$this->region}.");
+		}
+	}
+	
 	function init(){
 		require_once SCOUT_PATH_AWS_SDK_FOR_PHP;	
 	}
@@ -26,17 +33,7 @@ class aws {
 		if($value=='region'){
 			return $this->region;
 		}
-		return $this->defaults[$this->region][$value];
+		return $this->settings[$this->region][$value];
 	}
 	
-	function get_userdata($template = 'agent'){
-		$user_data = new template;
-		$user_data->load_template('userdata.'.$template);
-		$translation=array(
-			'domain' => SCOUT_DOMAIN,
-			'hostname' => $this->args[3],
-		);
-//		print_r($user_data->parse($translation));exit;
-		return base64_encode($user_data->parse($translation));
-	}
 }

@@ -26,7 +26,6 @@ if(array_key_exists($command, $commands)){
 	$go = new $commands[$command];
 	$go->init();
 	$go->run();
-	stop();	
 }else{
 	$m->error("Unrecognised command: '$command'. Type 'scout help' for usage." );	
 	exit;	

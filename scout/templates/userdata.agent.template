@@ -1,0 +1,5 @@
+#!/bin/sh
+echo {{{host}}}.{{{domain}}} > /etc/hostname
+echo {{{puppet_master_ip}}} puppet {{{puppet_master_hostname}}} >> /etc/hosts
+/etc/init.d/hostname restart
+aptitude -y install puppet

@@ -7,7 +7,7 @@ class message {
 	}
 
 	function debug($text, $extras=array()){
-		echo $text."\n";
+		print_r($text);
 	}
 
 	function fatal($text, $extras=array()){

@@ -1,1 +1,9 @@
-hello
+#!/bin/sh
+echo {{{host}}}.{{{domain}}} > /etc/hostname
+/etc/init.d/hostname restart
+aptitude -y install puppetmaster git
+git clone git://github.com/michaelmcandrew/scout.git /scout
+rmdir /etc/puppet/manifests /etc/puppet/modules
+ln -s /scout/puppet/manifests/ /etc/puppet/manifests
+ln -s /scout/puppet/modules/ /etc/puppet/modules
+
