@@ -24,7 +24,7 @@ class apache{
 }
 
 class php{
-  package { ['php-apc', 'php-elisp', 'php-cgi', 'php-cli', 'php5-mysql'] :
+  package { ['php-apc', 'php-elisp', 'php5-cgi', 'php5-cli', 'php5-mysql', 'php5-gd'] :
     ensure => present
   }
   file { "/var/www/phpinfo.php":
