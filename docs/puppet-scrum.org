@@ -1,1 +1,0 @@
-* get it set up without any fucking around.  seems like i just have to understand the certificate issue

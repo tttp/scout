@@ -1,0 +1,12 @@
+This document describes a suggested architecture for a scout powered CiviCRM hosting service
+
+Database servers - a multi availablity zone AWS rds
+Application servers - two across availability zones
+File servers - two (micro?) running gluster
+HTTP oad balancer (one for all http sites) - connects to the application severs for all http sites
+HHTPS load balancer (one for each site) - connects to the application servers for each https site
+Backup - AWS snapshot of fileserver (we take it offline once a night to make a snapshot?)
+
+Number of small instances: 4
+Number of micro instances: 2
+Number of load balancers: ~3
