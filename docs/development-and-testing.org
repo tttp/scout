@@ -1,0 +1,17 @@
+As well as the production environment, scout can help you manage your
+testing (staging?) and development environments.
+
+* testing
+Scout assumes that your testing server will be one machine which is
+accessed by various projects.  As such all projects on a test server
+are run under a user of the same name
+
+* development
+Scout assumes that development happens on your local machine.
+
+* syncing
+There are three different aspects that need to be synchronised: db,
+files, and code.
+
+There are two places that we want to sync: test and local/dev
+

@@ -1,5 +1,6 @@
-* backup
-open account on rackspace to do backups
+* create DB server
+configure an AWS db server.  How can we ensure that this is spread
+amongst availablity zones and regions
 * create distributed file system
 AWS doesn't have a distributed file system so we need to solve the
 problem of how we make DRUPAL/sites/default/files available to more
@@ -21,7 +22,10 @@ distributed file system? Doesn't AWS provide that?
 ** use gluster
 Acquia does:
 http://www.cloudave.com/21/acquia-uses-gluster-storage-for-drupal-gardens-saas-offering/
-* how can we provide SSL in a secure / redundant way for each client that requires it?
+* backup
+open account on rackspace to do database and file backups once a night
+from AWS rotating on a week by week basis
+* workout how to provide SSL in a secure / redundant way for each client that requires it?
 AWS can attach SSL to a load balancer.  We can then have one SSL
 connection for each load balancer (which are AWS redundant).  Using
 the API, we can attach all load balancers to multiple app servers.
@@ -36,13 +40,9 @@ Maybe the entire collection of sites.
 Do we have a seperate user for each project? Do we use /home/PROJECT?
 Maybe not necessary if we aren't ever sudo ing on to production.
 Maybe useful for the times that we need to.
-* create DB server
-configure an AWS db server.  How can we ensure that this is spread
-amongst availablity zones and regions
 * Configure monitoring
 How do we do monitoring of the DB server? Not a problem if we can't tho would be nice to see them all in one place
-* automate connection of nodes
-* create project scripts
+* create project make/provision scripts
 scout project create PROJECT 
 scout project deploy PROJECT
 scout sync PROJECT SITE (SITE = TEST, DEV, LOCAL, BRAZIL)
@@ -53,7 +53,5 @@ need to optimise the following
 ** php
 ** apc
 ** apache
-** mysql
-(probably taken care of via aws)
-** apc
+w** apc
 

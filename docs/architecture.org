@@ -1,12 +1,34 @@
-This document describes a suggested architecture for a scout powered CiviCRM hosting service
+This document describes the recommended/default/suggested architecture
+for a scout powered CiviCRM hosting service, including a production
+site, and test sites. 
 
-Database servers - a multi availablity zone AWS rds
-Application servers - two across availability zones
-File servers - two (micro?) running gluster
-HTTP oad balancer (one for all http sites) - connects to the application severs for all http sites
-HHTPS load balancer (one for each site) - connects to the application servers for each https site
-Backup - AWS snapshot of fileserver (we take it offline once a night to make a snapshot?)
-
-Number of small instances: 4
-Number of micro instances: 2
-Number of load balancers: ~3
+* production
+** production database servers
+This is a multi availablity-zone AWS rds
+** production application servers
+Two across availability zones
+** Production file servers
+Are these actually just gluster on the application servers? i.e. the
+application server boots up and mounts the gluster on /var/www 
+** Production load balancers
+one HTTP load balancer for all http sites
+multiple HTTPS load balancers for each https site
+* Test
+Test servers are built as provide the application, file and database
+functionality of the above production site.  They are not backed up or
+load balanced.
+They are also built to be multi-user so that we can provide clients
+with access to an environment which is as similar to their production
+environment as possible
+* Backup
+We back up for two different reasons: disaster recovery and point in time.
+** disaster recovery
+We have disaster recovery on Rackspace and/or Linode to ensure that if
+the shit hits the fan at AWS, we are protected.  This includes db and
+file backups 
+** point in time
+We take an AWS snapshot of the fileserver (we take it offline once a
+night to make a snapshot?) once a day.  We make AWS snapshot of
+database servers once a day and once a week indefinitley.  We then
+trim these down to once a month after a year.  This allows us to go
+back in time. 

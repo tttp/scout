@@ -1,0 +1,5 @@
+Suggested methods for mantaining Drupal and CiviCRM sites with Scout
+
+* Upgrading
+1. Upgrade locally (file and database)
+2. push to repository

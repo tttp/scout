@@ -1,35 +1,56 @@
-* each client runs under own user
-* each client has permissions set by an adapted version of the drupal fix permissions script
-* we have a drush make script for each project
-* all client passwords are stored somewhere secure
-* clients have the following different passwords
-** mysql user
-** cron user? (seperate from admin user)
-* do we set an admin user for Drupal?
-* list of configuration files
-|----------------------+---------------------------------------------------------|
-| File/usage           | Path                                                    |
-|----------------------+---------------------------------------------------------|
-| virtual host         | /etc/apache/sites-available/CLIENT_NAME                 |
-| settings.php         | /var/www/CLIENT_NAME/sites/default/settings.php         |
-| civicrm.settings.php | /var/www/CLIENT_NAME/sites/default/civicrm.settings.php |
-|----------------------+---------------------------------------------------------|
-* list of variables to be set in these configuration files
-|---------------------+--------------------------------------------|
-| Variable name       | Notes                                      |
-|---------------------+--------------------------------------------|
-| client name         | alphanumeric                               |
-| ServerName          |                                            |
-| ServerAliases       | Can be more than one                       |
-| Server root         |                                            |
-| CiviCRM database    |                                            |
-| Drupal database     |                                            |
-| Database host       | Should this be the same for both datbases? |
-| templates directory |                                            |
-| Site key            |                                            |
-| cron user name?     |                                            |
-| cron user password? |                                            |
-|---------------------+--------------------------------------------|
+A specification for provisioning civicrm and drupal projects
+
+* project configuration
+The following needs to be configured to run a scout project.
+
+This needs to be backed up so that we can do a quick disaster recovery
+if necessary.
+
+We need to work out how to set the password and how to have this
+backed up but not public. 
+
+The project configuration includes:
+- project name: name: lowercase alphanumeric
+- project full name: full_name: text
+- project production URLs (the canonical URL, followed by other URLs that this
+  site can be accessed from (would be great to be able to set these
+  up automatically an to handle the redirection): prod_urls: array of valid
+  urls with(without?) trailing slash
+- enforce canonical: force all requests to be redirected to the
+  canonical URL: enforce_canonical_url: boolean
+- database host (is this set by default?)
+
+Private project configuration includes:
+- site key
+- database password
+
+All other configuration settings are either default or a combination
+of the above settings. 
+
+* make
+the drush make:
+- download the 3sd module/theme/library selection
+- download the latest version of civicrm
+- add the gitignore file
+- set the correct permissions on the files
+- create a repository for this project
+- upload the repository to github / back it up
+  
+* provision
+the drush provision can happen locally, but should also be able to
+happen on the development server.
+
+the drush provision needs to:
+- pull the repository to the server (if it is a remote server)
+- create a database for drupal and civicrm
+- create configuration files for drupal and civicrm
+- run the installation for drupal and civicrm
+- set correct permissions on the files
+- enable modules that should be enabled
+- create users that should be created
+- set configuration that should be set
+- set the virtual host
+
 
 
 
