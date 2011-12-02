@@ -1,24 +1,24 @@
-=Aim=
+* Aim
 
 The aim of Scout is to 'open source the CiviCRM hosting community' i.e. provide a way to define and share a hosting infrastructure for CiviCRM and allow people to easily share improvements to that infrastructure.
 
-=Who is it for?=
+* Who is it for?
 
 Scout is designed for CiviCRM focused development organiastions that need to develop and host multiple installations for multiple clients and want to work in partnership with others in the CiviCRM community.
 
 Clients that use CiviCRM might also be interested in Scout (and development organisations that use Scout) because it provides a reliable and secure hosting infrastructure and a set of procedures that will enable them to:
 
-* work easily with more than one developer
-* access point in time backups
-* move easily between hosts
+- work easily with more than one developer
+- access point in time backups
+- move easily between hosts
  
-=Priniciples=
+* Priniciples
 
 The ideas behind Scout are:
 
-* popular and widely available software (Ubuntu packages) and hardware (AWS)
-* software and hardware configuration management (Puppet)
+- popular and widely available software (Ubuntu packages) and hardware (AWS)
+- software and hardware configuration management (Puppet)
 
-=Documentation=
+* Documentation
 
 Documenation is in the scout/docs directory.
