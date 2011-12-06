@@ -4,7 +4,7 @@ The aim of Scout is to 'open source the CiviCRM hosting community' i.e. provide 
 
 * Who is it for?
 
-Scout is designed for CiviCRM focused development organiastions that need to develop and host multiple installations for multiple clients and want to work in partnership with others in the CiviCRM community.
+Scout is designed for CiviCRM focused development organisations that need to develop and host multiple installations for multiple clients and want to work in partnership with others in the CiviCRM community.
 
 Clients that use CiviCRM might also be interested in Scout (and development organisations that use Scout) because it provides a reliable and secure hosting infrastructure and a set of procedures that will enable them to:
 
